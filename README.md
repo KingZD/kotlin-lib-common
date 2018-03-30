@@ -33,6 +33,8 @@ debug.jks.去掉后缀 更名为 debug.jks
 
 >[安卓中国](https://developer.android.google.cn/index.html "安卓中国")
 
+ps 以下的依赖只是common目录下的常用组建 不包含上面的自定义view
+
 依赖方式
 ==
 	allprojects {
