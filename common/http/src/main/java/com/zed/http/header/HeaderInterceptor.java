@@ -3,11 +3,13 @@ package com.zed.http.header;
 import android.text.TextUtils;
 
 import com.zed.common.util.LogUtils;
+import com.zed.http.HttpClientParam;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -16,12 +18,18 @@ import okhttp3.Response;
  * Desc  : header 参数拦截器
  */
 public class HeaderInterceptor implements Interceptor {
+    HttpClientParam mParam;
+
+    public HeaderInterceptor(HttpClientParam param) {
+        this.mParam = param;
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         final Request originalRequest = chain.request();
         final Request.Builder newBuilder = originalRequest.newBuilder();
-
+        if (!originalRequest.url().toString().startsWith(mParam.currentUrl()))
+            newBuilder.url(mParam.currentUrl());
         // add header
         Map<String, String> headerParams = getHeader(originalRequest);
         StringBuilder sb = new StringBuilder();
@@ -35,8 +43,11 @@ public class HeaderInterceptor implements Interceptor {
             }
         }
         LogUtils.d("Header: " + sb.toString());
-
-        return chain.proceed(newBuilder.build());
+        Request newRequest = newBuilder.build();
+        LogUtils.i("originalRequest url is " + originalRequest.url().toString()
+                + "\ncurrent param url is " + mParam.currentUrl()
+                + "\nswitch url is " + newRequest.url().toString());
+        return chain.proceed(newRequest);
     }
 
     private Map<String, String> getHeader(Request originalRequest) {

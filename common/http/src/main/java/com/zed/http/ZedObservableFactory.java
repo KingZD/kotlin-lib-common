@@ -1,5 +1,7 @@
 package com.zed.http;
 
+import com.zed.http.listener.SwitchUrlListener;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -14,9 +16,20 @@ import retrofit2.Retrofit;
  * Created by ZD on 2017/9/2.
  */
 
-public class GAObservableFactory extends CallAdapter.Factory {
-    public static GAObservableFactory create() {
-        return new GAObservableFactory();
+public class ZedObservableFactory extends CallAdapter.Factory {
+    static SwitchUrlListener mListener;
+    static int maxRetries;
+    static int retryDelayMillis;
+
+    public static ZedObservableFactory create() {
+        return new ZedObservableFactory();
+    }
+
+    public static ZedObservableFactory create(SwitchUrlListener listener, int maxRetries, int retryDelayMillis) {
+        mListener = listener;
+        ZedObservableFactory.maxRetries = maxRetries;
+        ZedObservableFactory.retryDelayMillis = retryDelayMillis;
+        return new ZedObservableFactory();
     }
 
     @Nullable
@@ -45,7 +58,9 @@ public class GAObservableFactory extends CallAdapter.Factory {
 
         @Override
         public Object adapt(Call<R> call) {
-            return new GAObservable<>(call);
+            if (mListener != null)
+                return new ZedObservable<>(call, mListener, maxRetries, retryDelayMillis);
+            return new ZedObservable<>(call);
         }
     }
 }

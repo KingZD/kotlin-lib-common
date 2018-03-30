@@ -80,7 +80,7 @@ public class GlideUtils {
                     }).getSize(new SizeReadyCallback() {
                 @Override
                 public void onSizeReady(int width, int height) {
-                    LogUtils.e("->" + width + "-" + height);
+//                    LogUtils.e("->" + width + "-" + height);
                 }
             });
         else
@@ -102,7 +102,7 @@ public class GlideUtils {
                     }).getSize(new SizeReadyCallback() {
                 @Override
                 public void onSizeReady(int width, int height) {
-                    LogUtils.e("->" + width + "-" + height);
+//                    LogUtils.e("->" + width + "-" + height);
                 }
             });
     }

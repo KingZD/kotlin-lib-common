@@ -86,9 +86,6 @@ public class AppConstant {
      * API 相关
      */
 
-    // API Host
-    public final static String BaseUrl = "http://106.15.201.180:10021/";
-
     // API Timeout 单位:秒
     public static final int TIMEOUT_READ = 25;
 
