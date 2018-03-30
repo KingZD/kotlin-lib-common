@@ -43,5 +43,5 @@ debug.jks.去掉后缀 更名为 debug.jks
 	}
   
   	dependencies {
-	        compile 'com.github.KingZD:kotlin-lib-common:V1.0'
+	        compile 'com.github.KingZD:kotlin-lib-common:1.1'
 	}
