@@ -1,5 +1,11 @@
 package com.zed.example.net
 
+import com.zed.example.net.bean.BaseBean
+import com.zed.example.net.response.TestResponse
+import com.zed.http.HttpClient
+import com.zed.http.ZedObservable
+import com.zed.http.api.BaseResponse
+
 /**
  * @author zd
  * @package com.zed.example.net
@@ -11,4 +17,11 @@ package com.zed.example.net
  */
 object MyHttpService : MyApi {
 
+    override fun test(ss: String): ZedObservable<TestResponse> {
+        return SingletonHolder.API.test(ss)
+    }
+
+    private object SingletonHolder {
+        val API = HttpClient.getSingleton().getService(MyApi::class.java)!!
+    }
 }

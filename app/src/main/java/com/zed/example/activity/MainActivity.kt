@@ -6,6 +6,10 @@ import com.zed.example.base.BaseActivity
 import com.zed.example.fragment.HomeFragment
 import com.zed.example.fragment.SecondFragment
 import com.zed.example.fragment.ThirdFragment
+import com.zed.example.net.MyHttpService
+import com.zed.example.net.bean.BaseBean
+import com.zed.example.net.response.TestResponse
+import com.zed.http.rx.HttpObserver
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -29,6 +33,15 @@ class MainActivity : BaseActivity() {
 
     override fun initView() {
         selectHomeTab(R.id.rbOne)
+        MyHttpService.test("ss").execOnThread(object: HttpObserver<TestResponse>(){
+            override fun success(t: TestResponse?) {
+            }
+
+            override fun complete() {
+            }
+
+
+        },getHttpLifeRecycle())
     }
 
     fun showFragment(view: View) {
