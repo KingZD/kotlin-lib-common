@@ -88,6 +88,10 @@ public class HttpClient implements SwitchUrlListener {
 //        }
     }
 
+    public static HttpClientParam getParam() {
+        return param;
+    }
+
     public static void setParam(HttpClientParam param) {
         HttpClient.param = param;
     }

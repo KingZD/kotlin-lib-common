@@ -94,7 +94,7 @@ public class ZedObservable<T> extends Observable<T> implements Disposable {
         return originalCall.isCanceled();
     }
 
-    public class RetryWithDelay implements
+    private class RetryWithDelay implements
             Function<Observable<? extends Throwable>, Observable<?>> {
 
         private final int maxRetries;
