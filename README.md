@@ -6,7 +6,7 @@ app配置方式请看[ZDApplication.kt](https://github.com/KingZD/kotlin-lib-com
 这里initHttpParam() httpCache的数据是 [HmbbPresenter.kt](https://github.com/KingZD/kotlin-lib-common/blob/master/app/src/main/java/com/zed/example/presenter/HmbbPresenter.kt "HmbbPresenter") 的getAllData()返回的服务器地址列表  
 以上模式需要 下次打开app新的服务器地址才会加入轮询  
 ***如果需要即时生效***  
-请在数据返回直接按照 [ZDApplication.kt](https://github.com/KingZD/kotlin-lib-common/blob/master/app/src/main/java/com/zed/example/ZDApplication.kt "ZDApplication")的 ***initHttpParam()*** 方式进行添加
+请在 [HmbbPresenter.kt](https://github.com/KingZD/kotlin-lib-common/blob/master/app/src/main/java/com/zed/example/presenter/HmbbPresenter.kt "HmbbPresenter") 的getAllData()按照 [ZDApplication.kt](https://github.com/KingZD/kotlin-lib-common/blob/master/app/src/main/java/com/zed/example/ZDApplication.kt "ZDApplication")的 ***initHttpParam()*** 方式进行添加
 <br/><br/>
 >#### V1~1.1版本的配置描述
 >[README_V1.md](https://github.com/KingZD/kotlin-lib-common/blob/master/README_V1.md "README_V1")
