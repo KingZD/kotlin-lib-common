@@ -17,4 +17,6 @@ import java.util.*
 interface IBaseConstruction {
     fun getActivity(): Activity?
     fun <T>getHttpLifeRecycle(): LifecycleTransformer<T>
+    fun showDialog()
+    fun dissDialog()
 }

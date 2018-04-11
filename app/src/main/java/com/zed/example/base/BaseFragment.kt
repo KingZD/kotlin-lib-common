@@ -11,6 +11,7 @@ import com.trello.rxlifecycle2.LifecycleTransformer
 import com.trello.rxlifecycle2.android.FragmentEvent
 import com.zed.common.util.UiUtil
 import com.zed.example.control.activity.UIActivityConstraint
+import com.zed.example.dialog.LoadingDialog
 import com.zed.example.net.bean.BaseBean
 import java.util.*
 
@@ -23,53 +24,21 @@ import java.util.*
  * @describe TODO
  * @email 1053834336@qq.com
  */
-abstract class BaseFragment<in T : BasePresenter<*, *>> : RxFragment(), UIActivityConstraint {
-    private var presenter: T? = null
+abstract class BaseFragment : BasePresenterFragment<BasePresenter<*, *>>(), UIActivityConstraint {
+    internal var dialog: LoadingDialog? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return UiUtil.inflate(context, setLayoutId(), container, false)
+    override fun showDialog() {
+        if (activity == null) return
+        if (dialog == null) {
+            dialog = LoadingDialog(context!!)
+        }
+        dialog?.show()
     }
 
-    fun setPresenter(presenter: T) {
-        this.presenter = presenter
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initView()
-    }
-
-    override fun clickTitleLeft() {
-    }
-
-    override fun clickTitleRight() {
-    }
-
-    override fun clickTitle() {
-    }
-
-    override fun <T> getHttpLifeRecycle(): LifecycleTransformer<T> {
-        return this.bindUntilEvent(FragmentEvent.STOP)
-    }
-
-
-    fun setStatusBarColor(color: Int) {
-        StatusBarUtil.setColorNoTranslucent(
-                activity, ContextCompat.getColor(context!!, color))
-    }
-
-    //沉浸式通知栏
-    fun setStatusBarImmersive(viewNeedOffset: View?) {
-        StatusBarUtil.setTransparentForImageView(activity, viewNeedOffset)
-    }
-
-    fun setStatusBarImmersiveInCoordinatorLayout() {
-        StatusBarUtil.setTranslucentForCoordinatorLayout(activity, 0)
-    }
-
-    override fun onDestroyView() {
-        presenter?.onDestory()
-        presenter = null
-        super.onDestroyView()
+    override fun dissDialog() {
+        if (dialog != null) {
+            dialog?.dismiss()
+            dialog = null
+        }
     }
 }

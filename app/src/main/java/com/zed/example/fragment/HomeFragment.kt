@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * @describe TODO
  * @email 1053834336@qq.com
  */
-class HomeFragment : BaseFragment<HomePresenter>(), UIHomeConstraint {
+class HomeFragment : BaseFragment(), UIHomeConstraint {
     override fun getRlView(): XRecyclerView? {
         return rv
     }

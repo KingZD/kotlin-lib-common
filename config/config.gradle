@@ -12,7 +12,7 @@ ext {
                host             : "zed.example", // host
 
                versionName      : "1.0.0",
-               versionCode      : 17112401
+               versionCode      : 18041101
     ]
 
     dependencies = [//support

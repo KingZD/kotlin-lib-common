@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.ViewGroup
 import com.zed.common.util.UiUtil
 import com.zed.example.R
+import com.zed.example.adapter.holder.HmbbHolder
 import com.zed.example.adapter.holder.HomeTypeHolder
 import com.zed.example.net.bean.HomeBean
 
@@ -20,13 +21,13 @@ class HomeTypeAdapter : BaseAdapter<HomeTypeHolder, HomeBean> {
 
     constructor(mContext: Context?, mList: MutableList<HomeBean>?) : super(mContext, mList)
 
-
-    override fun onBindViewHolder(holder: HomeTypeHolder, position: Int) {
+    override fun covert(holder: HomeTypeHolder, position: Int) {
         holder.setIndex(position)
         holder.init(mData?.get(position))
     }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): HomeTypeHolder {
-        return HomeTypeHolder(UiUtil.inflate(mContext, R.layout.item_home, parent, false))
+        return HomeTypeHolder(inflate(R.layout.item_home, parent, false))
     }
+
 }

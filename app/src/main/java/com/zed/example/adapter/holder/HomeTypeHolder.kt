@@ -24,14 +24,12 @@ class HomeTypeHolder : BaseHolder, IBaseHolderConstruction<HomeBean> {
     override fun init(bean: HomeBean?) {
         GlideUtils.Builder
                 .with(itemView)
-                .asBitmap()
                 .load(bean?.url)
                 .placeholder(R.mipmap.ic_user_default)
                 .round(60)
                 .into(itemView.ivIcon)
         GlideUtils.Builder
                 .with(itemView)
-                .asBitmap()
                 .load(bean?.url)
                 .placeholder(R.mipmap.ic_user_default)
                 .round(10)

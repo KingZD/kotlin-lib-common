@@ -1,9 +1,13 @@
 <resources>
-    <string name="app_name">kotlin-lib</string>
+    <string name="app_name">海绵宝宝</string>
     <!-- tab -->
     <string name="tab_one">TAB1</string>
     <string name="tab_two">TAB2</string>
     <string name="tab_three">TAB3</string>
     <string name="tab_four">TAB4</string>
     <string name="tab_five">TAB5</string>
+
+
+    <!-- 海绵宝宝 -->
+    <string name="tv_copyright">版权所有，翻版必究，有问题请联系163@com</string>
 </resources>

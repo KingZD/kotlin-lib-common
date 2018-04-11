@@ -28,32 +28,19 @@ android {
         targetSdkVersion rootProject.ext.android.targetSdkVersion
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
+        flavorDimensions "versionCode"
 //        manifestPlaceholders = [app_scheme: rootProject.ext.android.scheme,
 //                                app_host  : rootProject.ext.android.host]
 
         // 开启分包模式
         multiDexEnabled true
 
-        // 使用Cmake工具
-//        externalNativeBuild {
-//            cmake {
-//                cppFlags "-frtti -fexceptions"
-//                //生成多个版本的so文件
-////                abiFilters 'arm64-v8a','armeabi-v7a','x86','x86_64'
-//            }
-//        }
     }
 
-    // 配置CMakeLists.txt路径
-//    externalNativeBuild {
-//        cmake {
-//            path "CMakeLists.txt"  // 设置所要编写的c源码位置，以及编译后so文件的名字
-//        }
-//    }
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             // 签名
             signingConfig signingConfigs.release
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -67,6 +54,31 @@ android {
             manifestPlaceholders = [DEBUG: true]
         }
     }
+
+    productFlavors {
+        hmbb {}
+
+//        productFlavors.all { flavor ->
+//            flavor.manifestPlaceholders.put("CHANNEL_VALUE", name)
+//            flavor.manifestPlaceholders.put("JPUSH_CHANNEL", name)
+//        }
+
+        // 输出不同平台且带版本号的apk
+        applicationVariants.all { variant ->
+            variant.outputs.each { output ->
+                def preName
+                def newName
+                if ('debug'.equals(variant.buildType.name)) {
+                    preName = 'Debug_hmbb_'
+                } else {
+                    preName = 'hmbb_'
+                }
+                newName = preName + variant.productFlavors[0].name + '_' + rootProject.ext.android.versionName +
+                        '.' + rootProject.ext.android.versionCode + '.apk'
+                output.outputFileName = newName
+            }
+        }
+    }
 }
 
 dependencies {
@@ -78,4 +90,5 @@ dependencies {
     //分包
     compile rootProject.ext.dependencies["multidex"]
     compile rootProject.ext.dependencies["rebound"]
+    compile rootProject.ext.dependencies["convenientbanner"]
 }

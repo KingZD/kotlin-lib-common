@@ -18,7 +18,7 @@ import java.util.*
  * @describe TODO
  * @email 1053834336@qq.com
  */
-class SecondFragment : BaseFragment<BasePresenter<*, *>>(), View.OnClickListener {
+class SecondFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.r -> sv.cornerRadiusEnable(true)

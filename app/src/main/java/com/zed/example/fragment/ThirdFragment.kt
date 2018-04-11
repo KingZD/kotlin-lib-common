@@ -18,7 +18,7 @@ import java.util.*
  * @describe TODO
  * @email 1053834336@qq.com
  */
-class ThirdFragment : BaseFragment<BasePresenter<*, *>>(), View.OnClickListener {
+class ThirdFragment : BaseFragment(), View.OnClickListener {
     override fun setLayoutId(): Int {
         return R.layout.fragment_third
     }

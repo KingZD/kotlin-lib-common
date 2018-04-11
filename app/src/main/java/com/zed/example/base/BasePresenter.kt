@@ -66,6 +66,15 @@ abstract class BasePresenter<T : IBaseConstruction, M : BaseBean> : IBasePresent
         clear = true
     }
 
+
+    fun showDialog() {
+        getView()?.showDialog()
+    }
+
+    fun dissDialog() {
+        getView()?.dissDialog()
+    }
+
     /**
      * 根据刷新状态来判断是否清空数据(分页)
      * @param data 原始数据源(adapter里面的数据)
