@@ -7,6 +7,13 @@ app配置方式请看[ZDApplication.kt](https://github.com/KingZD/kotlin-lib-com
 以上模式需要 下次打开app新的服务器地址才会加入轮询  
 ***如果需要即时生效***  
 请在 [HmbbPresenter.kt](https://github.com/KingZD/kotlin-lib-common/blob/master/app/src/main/java/com/zed/example/presenter/HmbbPresenter.kt "HmbbPresenter") 的getAllData()按照 [ZDApplication.kt](https://github.com/KingZD/kotlin-lib-common/blob/master/app/src/main/java/com/zed/example/ZDApplication.kt "ZDApplication")的 ***initHttpParam()*** 方式进行添加
+
+切换服务器时打印日志如下 可以看到每次切换<br/>
+originalRequest url(原始地址) is http://127.0.0.1/xxx<br/>
+current param url(地址列表里面的地址) is http://127.0.0.1:80/xxx<br/>
+switch url(真实请求的地址) is http://127.0.0.1:80/xxx<br/>
+
+
 <br/><br/>
 >#### V1~1.1版本的配置描述
 >[README_V1.md](https://github.com/KingZD/kotlin-lib-common/blob/master/README_V1.md "README_V1")
