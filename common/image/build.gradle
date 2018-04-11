@@ -29,7 +29,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':common:recycleview')
+    compile project(':common:util')
     //image 需要放在同一module下
     compile rootProject.ext.dependencies["glide"]
     kapt rootProject.ext.dependencies["glide-compiler"]

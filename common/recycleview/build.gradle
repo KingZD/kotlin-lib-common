@@ -23,7 +23,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':common:util')
+    compile project(':common:image')
     //下拉刷新
     compile rootProject.ext.dependencies["SmartRefreshLayout"]
     compile rootProject.ext.dependencies["SmartRefreshHeader"]

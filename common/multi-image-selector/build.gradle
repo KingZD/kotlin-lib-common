@@ -23,7 +23,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':common:image')
+    compile project(':common:recycleview')
     //图片剪裁
 //    compile 'com.steelkiwi:cropiwa:1.0.0'
 }

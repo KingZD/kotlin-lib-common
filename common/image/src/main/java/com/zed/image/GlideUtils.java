@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.GenericTransitionOptions;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.transition.Transition;
@@ -41,11 +42,24 @@ public class GlideUtils {
     private int height;
     private CornerType cornerType;
     private boolean dontCenterCrop = false;
+    private boolean asGif = false;
 
     public GlideUtils() {
     }
 
     public void loadImg(final ImageView view) {
+        if(asGif){
+            GlideRequest<GifDrawable> gifDrawableGlideRequest = request.asGif();
+            if (file != null)
+                gifDrawableGlideRequest.load(file);
+            if (resId > 0)
+                gifDrawableGlideRequest.load(resId);
+            if (!TextUtils.isEmpty(path))
+                gifDrawableGlideRequest.load(path);
+            gifDrawableGlideRequest.into(view);
+            return;
+        }
+
         GlideRequest<Bitmap> transition = request.asBitmap()
                 .override(width, height)
                 .placeholder(placeHolderId)
@@ -214,7 +228,8 @@ public class GlideUtils {
             return builder;
         }
 
-        public Builder asBitmap() {
+        public Builder asGif() {
+            app.asGif = true;
             return builder;
         }
 
