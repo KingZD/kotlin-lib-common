@@ -30,5 +30,5 @@ ps 以下的依赖只是common目录下的常用组建 不包含上面的自定�
 	}
   
   	dependencies {
-	        compile 'com.github.KingZD:kotlin-lib-common:1.1.1'
+	        compile 'com.github.KingZD:kotlin-lib-common:1.1.2'
 	}
