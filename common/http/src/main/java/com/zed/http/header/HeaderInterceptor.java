@@ -7,6 +7,7 @@ import com.zed.http.HttpClientParam;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.HttpUrl;
@@ -28,8 +29,18 @@ public class HeaderInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         final Request originalRequest = chain.request();
         final Request.Builder newBuilder = originalRequest.newBuilder();
-        if (!originalRequest.url().toString().startsWith(mParam.currentUrl()))
-            newBuilder.url(mParam.currentUrl());
+        String originalRequestUrl = originalRequest.url().toString();
+        if (!originalRequestUrl.startsWith(mParam.currentUrl())) {
+            StringBuffer currUrl = new StringBuffer(mParam.currentUrl());
+            List<String> pathSegments = originalRequest.url().pathSegments();
+            if(pathSegments != null){
+                for (String path : pathSegments) {
+                    currUrl.append("/");
+                    currUrl.append(path);
+                }
+            }
+            newBuilder.url(currUrl.toString());
+        }
         // add header
         Map<String, String> headerParams = getHeader(originalRequest);
         StringBuilder sb = new StringBuilder();
@@ -44,7 +55,7 @@ public class HeaderInterceptor implements Interceptor {
         }
         LogUtils.d("Header: " + sb.toString());
         Request newRequest = newBuilder.build();
-        LogUtils.i("originalRequest url is " + originalRequest.url().toString()
+        LogUtils.i("originalRequest url is " + originalRequestUrl
                 + "\ncurrent param url is " + mParam.currentUrl()
                 + "\nswitch url is " + newRequest.url().toString());
         return chain.proceed(newRequest);
