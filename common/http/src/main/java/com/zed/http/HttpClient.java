@@ -55,6 +55,8 @@ public class HttpClient implements SwitchUrlListener {
                 .client(okHttpClient)
                 //baseUrl
                 .baseUrl(param.currentUrl())
+                //处理java.io.EOFException:End of input at line 1 column 1 path $
+                .addConverterFactory(new NullOnEmptyConverterFactory())
                 //gson转化器
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 //自适配
