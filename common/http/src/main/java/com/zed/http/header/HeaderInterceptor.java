@@ -41,9 +41,11 @@ public class HeaderInterceptor implements Interceptor {
         HttpUrl parse;
         String originalRequestUrl = requestUrl.toString();
         String currentUrl = mParam.currentUrl();
+        HttpUrl currParse = HttpUrl.parse(currentUrl);
+        //这里是为了过滤含有path的url 因为只需要地址就可以
+        //ex: http://xxx:80/aa/bb => http://xxx:80
+        currentUrl = currParse.scheme() + "://" + currParse.host();
         if (!originalRequestUrl.startsWith(currentUrl)) {
-            //这里是为了过滤含有path的url 因为只需要地址就可以
-            //ex: http://xxx:80/aa/bb => http://xxx:80
             parse = HttpUrl.parse(currentUrl);
         } else {
             parse = requestUrl;
